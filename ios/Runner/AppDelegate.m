@@ -7,19 +7,6 @@
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [GeneratedPluginRegistrant registerWithRegistry:self];
-  
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        UIViewController *rootVc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    
-        ViewController *vc = [[ViewController alloc] init];
-        
-        vc.rootVc = rootVc;
-        [UIApplication sharedApplication].keyWindow.rootViewController = vc;
-//        ViewController *vc = [[ViewController alloc] init];
-//        vc.modalPresentationStyle = UIModalPresentationFullScreen;
-//        [[self getCurrentVC] presentViewController:vc animated:NO completion:nil];
-    });
-
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
