@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_webview_test/provider_page.dart';
 import 'package:flutter_app_webview_test/tabbar_icon.dart';
 import 'package:flutter_app_webview_test/unknow_page.dart';
 import 'package:provider/provider.dart';
@@ -56,7 +57,9 @@ class DataTabBar {
     name = ValueUtil.toStr(json['name']);
     config = TabBarConfig.fromMap(ValueUtil.toMap(json['config']));
 
-    data = ValueUtil.toList(json['data']).map((e) => TabBarItem.fromMap(ValueUtil.toMap(e))).toList();
+    data = ValueUtil.toList(json['data'])
+        .map((e) => TabBarItem.fromMap(ValueUtil.toMap(e)))
+        .toList();
   }
 }
 
@@ -78,7 +81,8 @@ class AppInfo {
     indexType = ValueUtil.toInt(map['index_type']);
     isEnforceSync = ValueUtil.toInt(map['is_enforce_sync']);
     isOpenRecommend = ValueUtil.toInt(map['is_open_recommend']);
-    isOpenWechatappLocation = ValueUtil.toInt(map['is_open_wechatapp_location']);
+    isOpenWechatappLocation =
+        ValueUtil.toInt(map['is_open_wechatapp_location']);
     isOpenScanQrcode = ValueUtil.toInt(map['is_open_scan_qrcode']);
     isOpenOfficialAccount = ValueUtil.toInt(map['is_open_official_account']);
     String strTabBar = ValueUtil.toStr(map['tab_bar']);
@@ -93,6 +97,8 @@ extension ScreenChild on Screen {
         return HomePage(
           key: UniqueKey(),
         );
+      case "category":
+        return ProviderPage();
       default:
         return UnknownPage(path: this.item.name);
     }
@@ -102,8 +108,10 @@ extension ScreenChild on Screen {
 }
 
 class RootViewModel extends ChangeNotifier {
-  static RootViewModel of(BuildContext context) => Provider.of<RootViewModel>(context, listen: false);
-  List<BottomNavigationBarItem> get bottomNavigationBarItems => _bottomNavigationBarItems;
+  static RootViewModel of(BuildContext context) =>
+      Provider.of<RootViewModel>(context, listen: false);
+  List<BottomNavigationBarItem> get bottomNavigationBarItems =>
+      _bottomNavigationBarItems;
   List<BottomNavigationBarItem> _bottomNavigationBarItems;
 
   List<Widget> _pages;
